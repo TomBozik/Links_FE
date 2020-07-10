@@ -33,7 +33,7 @@ const router = new VueRouter({
 
 
 function isLoggedIn(){
-    return localStorage.getItem('auth');
+    return localStorage.getItem('token');
 }
 
 

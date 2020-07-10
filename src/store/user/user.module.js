@@ -1,7 +1,7 @@
 import UserApi from "@/apis/User";
 import router from "@/router";
 
-const isLoggedIn = localStorage.getItem('auth');
+const isLoggedIn = localStorage.getItem('token');
 const initialState = isLoggedIn
   ? { loggedIn: true, user: null  }
   : { loggedIn: false, user: null };
@@ -58,8 +58,8 @@ export const user = {
 
 
   mutations: {
-    LOGIN_SUCCESS(state) {
-      localStorage.setItem('auth', "true");
+    LOGIN_SUCCESS(state, data) {
+      localStorage.setItem('token', data.data);
       state.loggedIn = true;
     },
     LOGIN_FAILURE(state) {
@@ -76,7 +76,7 @@ export const user = {
     LOGOUT(state){
       state.loggedIn = false;
       state.user = null;
-      localStorage.removeItem('auth');
+      localStorage.removeItem('token');
       router.push({name: 'Login'});
     },
 
@@ -86,7 +86,7 @@ export const user = {
     GET_USER_FAILURE(state) {
       state.loggedIn = false;
       state.user = null;
-      localStorage.removeItem('auth');
+      localStorage.removeItem('token');
       router.push({name: 'Login'});
     },
   }
