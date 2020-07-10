@@ -1,21 +1,43 @@
 <template>
-  <div class="max-w-md mx-auto pt-12">
+  <div class="flex items-center justify-center min-h-screen bg-gray-200 ">
 
-    <div class="flex flex-wrap mb-6">
-      <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-      <input v-model="form.email" type="email" class="form-input w-full shadow-md" name="email" autocomplete="email" />
-      <span v-if="errors.email"> {{errors.email[0]}}</span>
-    </div>
+    <!-- card -->
+    <div class="flex overflow-hidden bg-white rounded-lg shadow-2xl">
 
-    <div class="flex flex-wrap mb-6">
-      <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-      <input v-model="form.password" type="password" class="form-input w-full shadow-md" name="password" />
-       <span v-if="errors.password"> {{errors.password[0]}}</span>
-    </div>
+      <!-- img -->
+      <div clas="flex md:w-1/4">
+        <img class="hidden object-cover w-full p-12 md:block" src="@/assets/login.svg">
+      </div>
+      <!-- img end -->
 
-    <div class="flex flex-wrap">
-      <button type="submit" @click.prevent="handleLogin" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700">Login</button>
+
+      <!-- text -->
+      <div class="flex flex-col w-full px-12 py-24 md:w-3/4">
+        Welcome
+        <!-- form -->
+          <div class="flex flex-wrap w-full">
+            <label for="email" class="block mb-2 text-sm font-bold text-gray-700">Email</label>
+            <input v-model="form.email" type="email" class="w-full shadow-md form-input" name="email" autocomplete="email" />
+            <span v-if="errors.email"> {{errors.email[0]}}</span>
+          </div>
+        
+          <div class="flex flex-wrap w-full">
+            <label for="password" class="block mb-2 text-sm font-bold text-gray-700">Password</label>
+            <input v-model="form.password" type="password" class="w-full shadow-md form-input" name="password" />
+            <span v-if="errors.password"> {{errors.password[0]}}</span>
+          </div>
+
+          <div class="flex flex-wrap">
+            <button type="submit" @click.prevent="handleLogin" class="inline-block px-4 py-2 text-base font-bold leading-normal text-center text-gray-100 no-underline whitespace-no-wrap align-middle bg-blue-500 border rounded select-none hover:bg-blue-700">Login</button>
+          </div>
+        <!-- form end -->
+
+      </div>
+      <!-- text end -->
+
+
     </div>
+    <!-- card end -->
 
   </div>
 </template>
