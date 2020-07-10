@@ -12,7 +12,7 @@
 
 
       <!-- text -->
-      <div class="flex flex-col w-full px-2 py-24 md:px-12 md:w-8/12">
+      <div class="flex flex-col w-full px-2 py-8 md:py-24 md:px-12 md:w-8/12">
         <div class="pb-12 text-2xl font-bold text-center">Welcome.</div>
         <!-- form -->
           <div class="flex flex-col w-full pb-6">
