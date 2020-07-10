@@ -6,4 +6,17 @@ body {
 }
 
 @tailwind components;
+
+.btn {
+    @apply p-2 text-lg font-bold;
+}
+  
+.btn-black {
+    @apply text-white bg-black;
+}
+  
+.btn-black:hover {
+    @apply bg-gray-700;
+}
+
 @tailwind utilities;

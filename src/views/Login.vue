@@ -2,35 +2,38 @@
   <div class="flex items-center justify-center min-h-screen bg-gray-200 ">
 
     <!-- card -->
-    <div class="flex overflow-hidden bg-white rounded-lg shadow-2xl">
+    <div class="flex max-w-6xl overflow-hidden bg-white rounded-lg shadow-2xl">
 
       <!-- img -->
-      <div clas="flex md:w-1/4">
-        <img class="hidden object-cover w-full p-12 md:block" src="@/assets/login.svg">
+      <div class="flex-col justify-center hidden w-4/12 px-6 md:flex">
+        <img class="hidden md:block" src="@/assets/login.svg">
       </div>
       <!-- img end -->
 
 
       <!-- text -->
-      <div class="flex flex-col w-full px-12 py-24 md:w-3/4">
-        Welcome
+      <div class="flex flex-col w-full px-2 py-24 md:px-12 md:w-8/12">
+        <div class="pb-12 text-2xl font-bold text-center">Welcome.</div>
         <!-- form -->
-          <div class="flex flex-wrap w-full">
+          <div class="flex flex-col w-full pb-6">
             <label for="email" class="block mb-2 text-sm font-bold text-gray-700">Email</label>
-            <input v-model="form.email" type="email" class="w-full shadow-md form-input" name="email" autocomplete="email" />
-            <span v-if="errors.email"> {{errors.email[0]}}</span>
+            <input v-model="form.email" type="email" class="w-full px-3 py-2 mt-1 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" name="email" autocomplete="email" />
+            <div v-if="errors.email" class="text-red-600"> {{errors.email[0]}}</div>
           </div>
         
-          <div class="flex flex-wrap w-full">
+          <div class="flex flex-col w-full pb-6">
             <label for="password" class="block mb-2 text-sm font-bold text-gray-700">Password</label>
-            <input v-model="form.password" type="password" class="w-full shadow-md form-input" name="password" />
-            <span v-if="errors.password"> {{errors.password[0]}}</span>
+            <input v-model="form.password" type="password" class="w-full px-3 py-2 mt-1 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" name="password" />
+            <div v-if="errors.password" class="text-red-600"> {{errors.password[0]}}</div>
           </div>
 
           <div class="flex flex-wrap">
-            <button type="submit" @click.prevent="handleLogin" class="inline-block px-4 py-2 text-base font-bold leading-normal text-center text-gray-100 no-underline whitespace-no-wrap align-middle bg-blue-500 border rounded select-none hover:bg-blue-700">Login</button>
+            <button type="submit" @click="handleLogin" class="w-full mt-4 btn btn-black">Login</button>
           </div>
         <!-- form end -->
+
+        <!-- <div class="pt-4 text-center">or</div>
+        <button class="w-full mt-4 btn btn-black">Login with Facebook</button> -->
 
       </div>
       <!-- text end -->
