@@ -1,7 +1,11 @@
 <template>
-  <div id="app">
-    <Navigation v-if="this.$route.path !== '/login' && this.$route.path !== '/register'"></Navigation>
-    <router-view />
+  <div class="flex flex-col h-screen">
+
+    <div class="flex flex-1 overflow-y-hidden">
+      <Navigation v-if="this.$route.path !== '/login' && this.$route.path !== '/register'"></Navigation>
+      <router-view />
+    </div>
+    
   </div>
 </template>
 

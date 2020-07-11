@@ -1,53 +1,67 @@
 <template>
-	<header class="w-full" id="all">
-		<div class="container items-center px-4 py-4 mx-auto sm:py-1 sm:flex sm:justify-between">
+	<div class="flex flex-col justify-between w-56 overflow-y-auto bg-gray-100 border-r">
+		
+		<div class="p-4 text-lg font-bold tracking-wide text-center uppercase shadow-md">Links</div>
 
-			<div class="flex items-center justify-between">
-				<!-- left side -->
-				<div class="flex items-center font-bold uppercase text-md dark:text-gray-500">
-					<i class="pr-2 fas fa-paperclip"></i> 
-					<div>Links</div>
+		<div class="flex flex-col flex-1 p-4 overflow-y-auto">
+
+			<div class="flex flex-col pb-4">
+				<div class="flex items-center">
+					<div class="w-1/6"><button class="self-start text-xl rounded-full appearance-none focus:outline-none" @click="newCategoryInput = !newCategoryInput"><i class="fas fa-plus"></i></button></div>
+					<input :class="{ hidden: !newCategoryInput }" v-model="newCategoryName" class="w-5/6 px-2 py-2 -my-2 font-semibold leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" id="category" type="text" placeholder="New Category">
 				</div>
-				<!-- left side end -->
-
-				<!-- burger  -->
-				<div class="sm:hidden" id="nav-burger">
-					<button type="button" class="block dark:text-gray-500" @click="isOpen = !isOpen">
-						<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-							<path v-if="isOpen" fill-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"/>
-							<path v-if="!isOpen" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
-						</svg>
-					</button>
-				</div>
-				<!-- burger end -->
+				<div class="pt-1 text-red-600" v-if="error && newCategoryInput ">{{error}}</div>
+				<button :class="{ hidden: !newCategoryInput }"  class="self-end pt-2 pr-1 font-bold focus:outline-none" @click="createCategory">Create</button>
 			</div>
-
-			<!-- links -->
-			<div id="nav-links" :class="isOpen ? 'block' : 'hidden'" class="items-center pt-8 pb-2 sm:pt-2 sm:flex">
-        <!-- <router-link v-if="loggedIn" :to="{name: 'Dashboard'}" class="block py-1 pr-8 font-bold uppercase">Dashboard</router-link> -->
-				<router-link v-if="!loggedIn" :to="{name: 'Login'}" class="block py-1 pr-8 font-bold uppercase">Login</router-link>
-        <router-link v-if="!loggedIn" :to="{name: 'Register'}" class="block py-1 pr-8 font-bold uppercase">Register</router-link>
-        <a href="#" @click.prevent="logout" v-if="loggedIn" class="block py-1 pr-8 font-bold uppercase">Logout</a>
-			</div>
-			<!-- links end -->
-				
+			
+			<CategoryList />
 		</div>
-	</header>
+
+		<div class="px-4 py-2 text-center border-t">
+			<a href="#" @click.prevent="logout" v-if="loggedIn" class="font-bold uppercase">Logout <i class="fas fa-sign-out-alt"></i></a>
+		</div>
+
+	</div>
 </template>
 
 <script>
+import CategoryList from "@/components/CategoryList";
+
 export default {
 	name: 'Navigation',
+
+	components: {
+    CategoryList,
+  },
 	
   data() {
 		return {
-			isOpen: false,
+			newCategoryInput: false,
+			newCategoryName: null,
+			error: null
 		}
 	},
 	
   methods: {
 		logout(){
 			this.$store.dispatch('user/logout');
+		},
+		loadCategories(){
+			this.$store.dispatch("link/getCategories");
+		},
+		createCategory(){
+			this.$store.dispatch('link/createCategory', this.newCategoryName)
+      .then(
+				() => {
+					this.error= null;
+					this.newCategoryName = null;
+				},
+        error => {
+          if(error.response.status === 402){
+						this.error = error.response.data.error;
+          }
+        }
+      );
 		}
 	},
 	
@@ -55,7 +69,12 @@ export default {
 		loggedIn: function() {
 			return this.$store.state.user.loggedIn;
 		},
-  },
+	},
+	
+	mounted: function(){
+		// this.loadCategories();
+	},
+	
 }
 </script>
 

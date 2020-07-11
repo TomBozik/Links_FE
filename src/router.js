@@ -27,7 +27,8 @@ const router = new VueRouter({
       name: "Dashboard",
       component: Dashboard,
       meta: { authOnly: true }
-    }
+    },
+    { path: "*", redirect: "/dashboard" },
   ]
 })
 
