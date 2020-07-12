@@ -1,5 +1,5 @@
 <template>
-	<div :class="navbarIsOpen ? 'hidden sm:flex' : 'w-full sm:flex'" class="flex-1 p-4 overflow-y-auto bg-gray-100">
+	<div :class="navbarIsOpen ? 'hidden sm:flex' : 'w-full flex'" class="flex-1 p-4 overflow-y-auto bg-gray-100">
 
 		<div class="self-center mx-auto"> 
 			<div v-if="user && !links && !loading && !loadingError" class="m-auto text-2xl font-bold tracking-wide">Welcome, {{user.name}}</div>
