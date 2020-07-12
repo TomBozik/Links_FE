@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-1 p-4 overflow-y-auto bg-gray-100">
+	<div :class="navbarIsOpen ? 'hidden sm:flex' : 'w-full sm:flex'" class="flex-1 p-4 overflow-y-auto bg-gray-100">
 
 		<div class="self-center mx-auto"> 
 			<div v-if="user && !links && !loading && !loadingError" class="m-auto text-2xl font-bold tracking-wide">Welcome, {{user.name}}</div>
@@ -37,7 +37,10 @@ export default {
 		},
 		loadingError: function() {
 			return this.$store.state.link.loadingError;
-		}
+		},
+		navbarIsOpen: function() {
+			return this.$store.state.navbar.isOpen;
+		},
 	},
 
 	mounted() {

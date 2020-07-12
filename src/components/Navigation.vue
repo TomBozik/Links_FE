@@ -1,10 +1,7 @@
 <template>
-	<div class="flex flex-col justify-between w-56 overflow-y-auto bg-gray-100 border-r">
-		
+	<div :class="navbarIsOpen ? 'flex w-full sm:w-56' : 'hidden sm:flex sm:w-56'" class="flex-col justify-between overflow-y-auto bg-gray-100 border-r" >
 		<div class="p-4 text-lg font-bold tracking-wide text-center uppercase shadow-md">Links</div>
-
 		<div class="flex flex-col flex-1 p-4 overflow-y-auto">
-
 			<div class="flex flex-col pb-4">
 				<div class="flex items-center">
 					<div class="w-1/6"><button class="self-start text-xl rounded-full appearance-none focus:outline-none" @click="newCategoryInput = !newCategoryInput"><i class="fas fa-plus"></i></button></div>
@@ -13,7 +10,6 @@
 				<div class="pt-1 text-red-600" v-if="error && newCategoryInput ">{{error}}</div>
 				<button :class="{ hidden: !newCategoryInput }"  class="self-end pt-2 pr-1 font-bold focus:outline-none" @click="createCategory">Create</button>
 			</div>
-			
 			<CategoryList />
 		</div>
 
@@ -31,7 +27,7 @@ export default {
 	name: 'Navigation',
 
 	components: {
-    CategoryList,
+		CategoryList,
   },
 	
   data() {
@@ -68,6 +64,9 @@ export default {
   computed:{
 		loggedIn: function() {
 			return this.$store.state.user.loggedIn;
+		},
+		navbarIsOpen: function() {
+			return this.$store.state.navbar.isOpen;
 		},
 	},
 	

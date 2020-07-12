@@ -1,5 +1,5 @@
 <template>
-  <div v-if="links" class="flex flex-col w-3/4 mx-auto">
+  <div v-if="links" class="flex flex-col w-full mx-auto sm:w-3/4">
     
     <div class="flex items-baseline">
       <div class="pb-4 pr-6 text-2xl font-bold tracking-wide"> {{ categoryName }}</div>
@@ -10,7 +10,7 @@
       <div class="p-2 mb-4 bg-white rounded-md shadow-lg">
         <div class="text-xl font-bold"> {{ link.name }} </div>
         <div class="font-semibold text-gray-700 text-md"> {{ link.description }} </div>
-        <div class="text-sm"> <a :href="link.url" target="_blank"> {{link.url}}</a></div>
+        <div class="text-sm truncate"> <a :href="link.url" target="_blank"> {{link.url}}</a></div>
       </div>
     </div>
 

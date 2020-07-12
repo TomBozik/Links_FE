@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="text-center sm:text-left">
 		<ul>
-      <li v-for="category in categories" :key="category.id" @click="setCategory(category.id)" class="pb-1 font-semibold cursor-pointer text-md">{{category.name}}</li>
+      <li v-for="category in categories" :key="category.id" @click="setCategory(category.id)" class="pb-4 text-xl font-semibold cursor-pointer sm:pb-1 sm:text-md">{{category.name}}</li>
     </ul>
 	</div>
 </template>
@@ -16,8 +16,9 @@ export default {
 	
   methods: {
     setCategory(categoryId){
+      this.$store.dispatch('navbar/toggleNavbar');
 			this.$store.dispatch('link/setActualCategory', categoryId);
-		},
+    },
 	},
 	
   computed:{
