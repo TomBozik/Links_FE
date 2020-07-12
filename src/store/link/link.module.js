@@ -7,6 +7,8 @@ export const link = {
     actualCategory: '',
     categories: [],
     links: null,
+    loading: false,
+    loadingError: false,
   },
 
   // getters
@@ -31,12 +33,15 @@ export const link = {
     },
 
     getLinks({ commit, state }) {
+      commit('LOADING_START');
       return LinkApi.getLinks(state.actualCategory).then(
         response => {
           commit('GET_LINKS_SUCCESS', response);
+          commit('LOADING_END');
         },
         () => {
-          commit('GET_LINKS_FAILURE');
+          commit('LOADING_END');
+          commit('LOADING_ERROR');
         }
       );
     },
@@ -102,6 +107,19 @@ export const link = {
     SET_ACTUAL_CATEGORY(state, categoryId) {
       state.actualCategory = categoryId;
     },
+
+    LOADING_START(state){
+      state.links = null;
+      state.loadingError = false;
+      state.loading = true;
+    },
+    LOADING_END(state){
+      state.loading = false;
+    },
+    LOADING_ERROR(state){
+      state.loading = false;
+      state.loadingError = true;
+    }
 
   }
 }

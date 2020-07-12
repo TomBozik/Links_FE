@@ -4,16 +4,9 @@
     <!-- card -->
     <div class="flex max-w-6xl overflow-hidden bg-white rounded-lg shadow-2xl">
 
-      <!-- img -->
-      <div class="flex-col justify-center hidden w-4/12 px-6 md:flex">
-        <img class="hidden md:block" src="@/assets/login.svg">
-      </div>
-      <!-- img end -->
-
-
       <!-- text -->
-      <div class="flex flex-col w-full px-2 py-8 md:py-24 md:px-12 md:w-8/12">
-        <div class="pb-12 text-2xl font-bold text-center">Welcome.</div>
+      <div class="flex flex-col w-full px-2 pt-8 pb-4 md:px-12">
+        <div class="pb-6 text-2xl font-bold text-center">Welcome.</div>
         <!-- form -->
           <div class="flex flex-col w-full pb-6">
             <label for="email" class="block mb-2 text-sm font-bold text-gray-700">Email</label>
@@ -31,6 +24,10 @@
             <button type="submit" @click="handleLogin" class="w-full mt-4 btn btn-black">Login</button>
           </div>
         <!-- form end -->
+
+        <div class="pt-8 text-center">
+          <router-link to="/register" class="cursor-pointer"> Create Account</router-link>
+        </div>
 
         <!-- <div class="pt-4 text-center">or</div>
         <button class="w-full mt-4 btn btn-black">Login with Facebook</button> -->
