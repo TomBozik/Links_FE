@@ -1,6 +1,6 @@
 <template>
 	<div :class="navbarIsOpen ? 'flex w-full sm:w-56' : 'hidden sm:flex sm:w-56'" class="flex-col justify-between overflow-y-auto bg-gray-100 border-r" >
-		<div class="p-4 text-lg font-bold tracking-wide text-center uppercase shadow-md">Links</div>
+		<div class="p-1 text-lg font-bold tracking-wide text-center uppercase shadow-md sm:p-4">Links</div>
 		<div class="flex flex-col flex-1 p-4 overflow-y-auto">
 			<div class="flex flex-col pb-4">
 				<div class="flex items-center">

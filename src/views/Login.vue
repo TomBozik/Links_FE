@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen mx-auto">
+  <div class="flex items-center justify-center w-full max-w-2xl min-h-screen px-2 mx-auto sm:w-1/2">
 
     <!-- card -->
-    <div class="flex max-w-6xl overflow-hidden bg-white rounded-lg shadow-2xl">
+    <div class="flex w-full overflow-hidden bg-white rounded-lg shadow-2xl">
 
       <!-- text -->
       <div class="flex flex-col w-full px-2 pt-8 pb-4 md:px-12">

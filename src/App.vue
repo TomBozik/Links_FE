@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-screen">
-    <div class="flex flex-col items-end p-2 bg-gray-100 sm:hidden">
+    <div class="flex flex-col items-end px-2 pt-2 bg-gray-100 sm:hidden">
       <Burger v-if="this.$route.path !== '/login' && this.$route.path !== '/register'"></Burger>
     </div>
     <div class="flex flex-1 overflow-y-hidden">
