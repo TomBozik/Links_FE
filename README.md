@@ -1,5 +1,7 @@
 # links-fe
 
+BE: https://github.com/TomBozik/links-be
+
 ## Project setup
 ```
 npm install
