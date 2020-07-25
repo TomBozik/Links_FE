@@ -1,40 +1,19 @@
-import CategoryApi from "@/apis/Category";
 import LinkApi from "@/apis/Link";
 
 export const link = {
   namespaced: true,
   state: {
-    actualCategory: '',
-    categories: [],
     links: null,
     loading: false,
     loadingError: false,
   },
 
-  // getters
-  getters: {
-    actualCategoryName: state => {
-      return state.categories.filter(category => category.id === state.actualCategory)[0]['name']
-    }
-  },
 
   // actions
   actions: {
-
-    getCategories({ commit }) {
-      return CategoryApi.getCategories().then(
-        response => {
-          commit('GET_CATEGORIES_SUCCESS', response);
-        },
-        () => {
-          commit('GET_CATEGORIES_FAILURE');
-        }
-      );
-    },
-
-    getLinks({ commit, state }) {
+    getLinks({ commit }) {
       commit('LOADING_START');
-      return LinkApi.getLinks(state.actualCategory).then(
+      return LinkApi.getLinks(this.state.category.actualCategory).then(
         response => {
           commit('GET_LINKS_SUCCESS', response);
           commit('LOADING_END');
@@ -46,15 +25,11 @@ export const link = {
       );
     },
 
-    setActualCategory({ dispatch, commit }, categoryId) {
-      commit('SET_ACTUAL_CATEGORY', categoryId);
-      dispatch('getLinks');
-    },
-
-    createCategory({commit}, categoryName){
-      return CategoryApi.createCategory(categoryName).then(
+    createLink({commit}, form){
+      form = Object.assign({'category_id': this.state.category.actualCategory}, form);
+      return LinkApi.createLink(form).then(
         response => {
-          commit('CREATE_CATEGORY_SUCCESS', response);
+          commit('CREATE_LINK_SUCCESS', response);
           return Promise.resolve(response);
         },
         error => {
@@ -63,11 +38,22 @@ export const link = {
       );
     },
 
-    createLink({commit, state}, form){
-      form = Object.assign({'category_id': state.actualCategory}, form);
-      return LinkApi.createLink(form).then(
+    updateLink({commit}, form){
+      return LinkApi.updateLink(form).then(
         response => {
-          commit('CREATE_LINK_SUCCESS', response);
+          commit('UPDATE_LINK_SUCCESS', response);
+          return Promise.resolve(response);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+
+    deleteLink({commit}, id){
+      return LinkApi.deleteLink(id).then(
+        response => {
+          commit('DELETE_LINK_SUCCESS', id);
           return Promise.resolve(response);
         },
         error => {
@@ -81,31 +67,22 @@ export const link = {
 
   // mutations
   mutations: {
-
-    GET_CATEGORIES_SUCCESS(state, response) {
-      state.categories = response.data.data;
-    },
-    GET_CATEGORIES_FAILURE(state) {
-      state.categories = [];
-    },
-
     GET_LINKS_SUCCESS(state, response) {
       state.links = response.data.data;
     },
     GET_LINKS_FAILURE(state) {
-      state.links = [];
-    },
-
-    CREATE_CATEGORY_SUCCESS(state, response) {
-      state.categories = response.data.data;
+      state.links = null;
     },
 
     CREATE_LINK_SUCCESS(state, response) {
-      state.links = response.data.data;
+      state.links.push(response.data.data);
     },
-
-    SET_ACTUAL_CATEGORY(state, categoryId) {
-      state.actualCategory = categoryId;
+    UPDATE_LINK_SUCCESS(state, response) {
+      state.links = state.links.filter(obj => obj.id !== response.data.data.id); 
+      state.links.push(response.data.data);
+    },
+    DELETE_LINK_SUCCESS(state, id) {
+      state.links = state.links.filter(obj => obj.id !== id); 
     },
 
     LOADING_START(state){
@@ -120,7 +97,6 @@ export const link = {
       state.loading = false;
       state.loadingError = true;
     }
-
   }
 }
 

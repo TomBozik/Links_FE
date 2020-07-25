@@ -7,4 +7,10 @@ export default {
   createLink(form){
     return Api().post('/resource', form);
   },
+  updateLink(form){
+    return Api().put(`/resource/${form.id}`, form);
+  },
+  deleteLink(id){
+    return Api().delete(`/resource/${id}`);
+  },
 }

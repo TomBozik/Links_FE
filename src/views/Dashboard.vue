@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import LinkList from "@/components/LinkList";
+import LinkList from "@/components/link/LinkList";
 
 export default {
 	name: 'Dashboard',
@@ -44,7 +44,7 @@ export default {
 	},
 
 	mounted() {
-		this.$store.dispatch('link/getCategories');
+		this.$store.dispatch('category/getCategories');
 		this.$store.dispatch('user/getUser');
 	}
 }

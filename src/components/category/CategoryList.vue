@@ -17,13 +17,13 @@ export default {
   methods: {
     setCategory(categoryId){
       this.$store.dispatch('navbar/toggleNavbar');
-			this.$store.dispatch('link/setActualCategory', categoryId);
+			this.$store.dispatch('category/setActualCategory', categoryId);
     },
 	},
 	
   computed:{
     categories: function(){
-      return this.$store.state.link.categories;
+      return this.$store.state.category.categories;
     }
   },
 }

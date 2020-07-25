@@ -8,7 +8,7 @@
 					<input :class="{ hidden: !newCategoryInput }" v-model="newCategoryName" class="w-5/6 px-2 py-2 -my-2 font-semibold leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" id="category" type="text" placeholder="New Category">
 				</div>
 				<div class="pt-1 text-red-600" v-if="error && newCategoryInput ">{{error}}</div>
-				<button :class="{ hidden: !newCategoryInput }"  class="self-end pt-2 pr-1 font-bold focus:outline-none" @click="createCategory">Create</button>
+				<button :class="{ hidden: !newCategoryInput }"  class="self-end pt-2 pr-1 text-sm font-semibold uppercase focus:outline-none" @click="createCategory">Create</button>
 			</div>
 			<CategoryList />
 		</div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CategoryList from "@/components/CategoryList";
+import CategoryList from "@/components/category/CategoryList";
 
 export default {
 	name: 'Navigation',
@@ -43,10 +43,10 @@ export default {
 			this.$store.dispatch('user/logout');
 		},
 		loadCategories(){
-			this.$store.dispatch("link/getCategories");
+			this.$store.dispatch("category/getCategories");
 		},
 		createCategory(){
-			this.$store.dispatch('link/createCategory', this.newCategoryName)
+			this.$store.dispatch('category/createCategory', this.newCategoryName)
       .then(
 				() => {
 					this.error= null;
