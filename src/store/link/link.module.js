@@ -6,13 +6,15 @@ export const link = {
     links: null,
     loading: false,
     loadingError: false,
+    pagination: null,
+    meta: null,
   },
 
   // actions
   actions: {
-    getLinks({ commit }) {
+    getLinks({ commit }, page) {
       commit('LOADING_START');
-      return LinkApi.getLinks(this.state.category.actualCategory).then(
+      return LinkApi.getLinks(this.state.category.actualCategory, page).then(
         response => {
           commit('GET_LINKS_SUCCESS', response);
           commit('LOADING_END');
@@ -24,11 +26,12 @@ export const link = {
       );
     },
 
-    createLink({commit}, form){
+    createLink({commit, dispatch}, form){
       form = Object.assign({'category_id': this.state.category.actualCategory}, form);
       return LinkApi.createLink(form).then(
         response => {
           commit('CREATE_LINK_SUCCESS', response);
+          dispatch('getLinks', 1);
           return Promise.resolve(response);
         },
         error => {
@@ -37,10 +40,11 @@ export const link = {
       );
     },
 
-    updateLink({commit}, form){
+    updateLink({commit, dispatch}, form){
       return LinkApi.updateLink(form).then(
         response => {
           commit('UPDATE_LINK_SUCCESS', response);
+          dispatch('getLinks', 1);
           return Promise.resolve(response);
         },
         error => {
@@ -49,10 +53,11 @@ export const link = {
       );
     },
 
-    deleteLink({commit}, id){
+    deleteLink({commit, dispatch}, id){
       return LinkApi.deleteLink(id).then(
         response => {
-          commit('DELETE_LINK_SUCCESS', id);
+          commit('DELETE_LINK_SUCCESS', response);
+          dispatch('getLinks', 1);
           return Promise.resolve(response);
         },
         error => {
@@ -68,6 +73,8 @@ export const link = {
   mutations: {
     GET_LINKS_SUCCESS(state, response) {
       state.links = response.data.data;
+      state.pagination = response.data.links;
+      state.meta = response.data.meta;
     },
     GET_LINKS_FAILURE(state) {
       state.links = null;

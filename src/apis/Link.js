@@ -1,8 +1,8 @@
 import Api from './Api';
 
 export default {
-  getLinks(categoryId){
-    return Api().get(`/resource?category=${categoryId}`);
+  getLinks(categoryId, page){
+    return Api().get(`/resource?category=${categoryId}&page=${page}`);
   },
   createLink(form){
     return Api().post('/resource', form);

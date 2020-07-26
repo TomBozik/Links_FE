@@ -29,7 +29,7 @@ export const category = {
 
     setActualCategory({ dispatch, commit }, categoryId) {
       commit('SET_ACTUAL_CATEGORY', categoryId);
-      dispatch('link/getLinks', null, {root: true});
+      dispatch('link/getLinks', 1, {root: true});
     },
 
     createCategory({commit}, categoryName){

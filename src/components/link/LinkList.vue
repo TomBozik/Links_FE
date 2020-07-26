@@ -1,12 +1,12 @@
 <template>
   <div v-if="links" class="flex flex-col w-full mx-auto sm:w-3/4">
     
-    <div class="flex items-baseline justify-between">
-      <div class="flex items-baseline">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
         <div class="pb-4 pr-6 text-2xl font-bold tracking-wide"> {{ categoryName }}</div>
         <div class="pb-4 text-sm font-semibold text-green-600 uppercase cursor-pointer" @click="toggleCreateModal">New link</div>
       </div>
-      <div class="flex items-baseline">
+      <div class="flex items-center">
         <div class="pb-4 text-sm font-semibold text-red-600 uppercase cursor-pointer" @click="toggleDeleteCategoryModal()">Delete Category</div>
       </div>
     </div>
@@ -30,6 +30,7 @@
 
       </div>
     </div>
+    <Pagination></Pagination>
 
   <createModal ref="createModal"></createModal>
   <updateModal ref="updateModal" v-bind:link="clickedLink"></updateModal>
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+import Pagination from "@/components/Pagination";
 import updateModal from "@/components/link/UpdateModal";
 import deleteModal from "@/components/link/DeleteModal";
 import createModal from "@/components/link/CreateModal";
@@ -48,6 +50,7 @@ import deleteCategoryModal from "@/components/category/DeleteCategoryModal";
 export default {
   name: 'LinkList',
   components: { 
+    Pagination,
     updateModal,
     deleteModal,
     deleteCategoryModal,
