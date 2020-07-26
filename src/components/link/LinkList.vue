@@ -18,6 +18,9 @@
             <div class="text-xl font-bold"> {{ link.name }} </div>
             <div class="font-semibold text-gray-700 text-md"> {{ link.description }} </div>
             <div class="text-sm truncate"> <a :href="link.url" target="_blank"> {{link.url}}</a></div>
+            <div class="flex pt-2">
+              <div v-for="tag in link.tags" :key="tag.name" class="px-1 text-xs font-semibold text-gray-700 uppercase">{{ tag.name }}</div>
+            </div>
           </div>
           <div class="flex flex-col items-end justify-between lg:flex-row">
             <div class="pr-0 text-blue-500 lg:pr-2"><button @click="toggleUpdateModal(link)" class="text-sm font-semibold uppercase">Update</button></div>
@@ -67,6 +70,7 @@ export default {
   methods:{
     toggleUpdateModal: function(link) { 
       this.clickedLink = { ...link }
+      this.clickedLink['tags'] = this.clickedLink['tags'].map( tag => tag.name);
       this.$refs.updateModal.toggleModal() 
     },
     toggleDeleteModal: function(link) { 

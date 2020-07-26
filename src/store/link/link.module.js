@@ -8,7 +8,6 @@ export const link = {
     loadingError: false,
   },
 
-
   // actions
   actions: {
     getLinks({ commit }) {
