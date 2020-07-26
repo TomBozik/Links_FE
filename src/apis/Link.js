@@ -13,4 +13,7 @@ export default {
   deleteLink(id){
     return Api().delete(`/resource/${id}`);
   },
+  export(){
+    return Api().request('/export', {responseType: 'blob'});
+  }
 }

@@ -13,6 +13,8 @@
 			<CategoryList />
 		</div>
 
+		<button @click="exportLinks" class="flex pl-2 text-sm font-semibold text-gray-700 uppercase">Export</button>
+		
 		<div class="px-4 py-2 text-center border-t">
 			<a href="#" @click.prevent="logout" v-if="loggedIn" class="font-bold uppercase">Logout <i class="fas fa-sign-out-alt"></i></a>
 		</div>
@@ -21,6 +23,7 @@
 </template>
 
 <script>
+import LinkApi from "@/apis/Link";
 import CategoryList from "@/components/category/CategoryList";
 
 export default {
@@ -39,6 +42,17 @@ export default {
 	},
 	
   methods: {
+		exportLinks(){
+			LinkApi.export().then(({ data }) => {
+        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.setAttribute('download', 'links.csv');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      });
+		},
 		logout(){
 			this.$store.dispatch('user/logout');
 		},
