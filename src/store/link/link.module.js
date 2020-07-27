@@ -11,13 +11,14 @@ export const link = {
     meta: null,
     tags: [],
     clickedLink: null,
+    filterTags: [],
   },
 
   // actions
   actions: {
-    getLinks({ commit }, page) {
+    getLinks({ commit, state }, page) {
       commit('LOADING_START');
-      return LinkApi.getLinks(this.state.category.actualCategory, page).then(
+      return LinkApi.getLinks(this.state.category.actualCategory, page, state.filterTags).then(
         response => {
           commit('GET_LINKS_SUCCESS', response);
           commit('LOADING_END');
@@ -82,6 +83,10 @@ export const link = {
 
     setClickedLink({commit}, link){
       commit('SET_CLICKED_LINK', link);
+    },
+    setFilterTags({commit, dispatch}, tags){
+      commit('SET_FILTER_TAGS', tags);
+      dispatch('getLinks', 1);
     }
 
   },
@@ -132,7 +137,10 @@ export const link = {
     SET_CLICKED_LINK(state, link){
       state.clickedLink = { ...link }
       state.clickedLink['tags'] = state.clickedLink['tags'].map( tag => tag.name);
-    }
+    },
+    SET_FILTER_TAGS(state, tags){
+      state.filterTags = tags;
+    },
   }
 }
 

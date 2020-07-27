@@ -17,10 +17,14 @@ export default {
 		return {}
   },
   methods: {
-    // overriden mixin method
+    // overriden mixin methods
     addTag(tag) {
       this.tags.push(tag);
-      console.log(tag);
+      this.$store.dispatch('link/setFilterTags', this.tags);
+    },
+    removeTag(index) {
+      this.tags.splice(index, 1);
+      this.$store.dispatch('link/setFilterTags', this.tags);
     },
   }
 }

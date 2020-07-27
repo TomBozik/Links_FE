@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <TagFilter></TagFilter>
+    <TagFilter ref="tagFilter"></TagFilter>
 
     <div v-if="links.length == 0 && loading" class="flex mx-auto font-semibold">LOADING...</div>
     <div v-if="links.length == 0 && loadingError" class="flex mx-auto font-semibold">ERROR</div>
@@ -22,7 +22,7 @@
             <div class="font-semibold text-gray-700 text-md"> {{ link.description }} </div>
             <div class="text-sm truncate hover:text-custom-orange"> <a :href="link.url" target="_blank"> {{link.url}}</a></div>
             <div class="flex pt-2">
-              <div v-for="tag in link.tags" :key="tag.name" class="px-1 text-xs font-semibold text-gray-700 uppercase">{{ tag.name }}</div>
+              <div v-for="tag in link.tags" :key="tag.name" class="px-1 text-xs font-semibold text-gray-700 uppercase cursor-pointer hover:text-custom-orange" @click="addTagToFilter(tag.name)">{{ tag.name }}</div>
             </div>
           </div>
           <div class="flex flex-col items-end justify-between lg:flex-row">
@@ -94,6 +94,9 @@ export default {
     },
     toggleDeleteCategoryModal: function() { 
       this.$refs.deleteCategoryModal.toggleModal() 
+    },
+    addTagToFilter: function(tag) { 
+      this.$refs.tagFilter.addTag(tag);
     },
   }
 }
