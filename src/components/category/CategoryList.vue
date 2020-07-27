@@ -1,7 +1,7 @@
 <template>
 	<div class="text-center sm:text-left">
 		<ul>
-      <li v-for="category in categories" :key="category.id" @click="setCategory(category.id)" class="pb-4 text-xl font-semibold cursor-pointer sm:pb-1 sm:text-md">{{category.name}}</li>
+      <li v-for="category in categories" :key="category.id" @click="setCategory(category.id)" class="pb-4 text-xl font-semibold cursor-pointer sm:pb-1 sm:text-md hover:text-custom-orange">{{category.name}}</li>
     </ul>
 	</div>
 </template>

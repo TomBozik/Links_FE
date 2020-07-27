@@ -1,11 +1,13 @@
 <template>
-  <div class="flex justify-center" v-if="meta.last_page != 1">
+<div v-if="meta">
+  <div class="flex justify-center" v-if="meta.last_page != 1 && !loading">
     <div v-for="index in meta.last_page" :key="index">
-      <button :class="index==meta.current_page ? 'text-red-500' : ''" class="px-1 font-bold" @click="changePage(index)">
+      <button :class="index==meta.current_page ? 'text-green-500' : ''" class="px-1 font-bold hover:text-custom-orange" @click="changePage(index)">
         {{index}}
       </button>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -22,6 +24,9 @@ export default {
     },
     meta: function() {
 			return this.$store.state.link.meta;
+    },
+    loading: function() {
+			return this.$store.state.link.loading;
 		},
 	},
 

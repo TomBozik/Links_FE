@@ -1,4 +1,5 @@
 import LinkApi from "@/apis/Link";
+import TagApi from "@/apis/Tag";
 
 export const link = {
   namespaced: true,
@@ -8,6 +9,8 @@ export const link = {
     loadingError: false,
     pagination: null,
     meta: null,
+    tags: [],
+    clickedLink: null,
   },
 
   // actions
@@ -64,6 +67,21 @@ export const link = {
           return Promise.reject(error);
         }
       );
+    },
+
+    getTags({ commit }) {
+      return TagApi.getTags().then(
+        response => {
+          commit('GET_TAGS_SUCCESS', response);
+        },
+        () => {
+          commit('GET_TAGS_FAILURE');
+        }
+      );
+    },
+
+    setClickedLink({commit}, link){
+      commit('SET_CLICKED_LINK', link);
     }
 
   },
@@ -92,7 +110,7 @@ export const link = {
     },
 
     LOADING_START(state){
-      state.links = null;
+      state.links = [];
       state.loadingError = false;
       state.loading = true;
     },
@@ -102,6 +120,18 @@ export const link = {
     LOADING_ERROR(state){
       state.loading = false;
       state.loadingError = true;
+    },
+
+    GET_TAGS_SUCCESS(state, response) {
+      state.tags = response.data.data;
+    },
+    GET_TAGS_FAILURE(state) {
+      state.tags = [];
+    },
+
+    SET_CLICKED_LINK(state, link){
+      state.clickedLink = { ...link }
+      state.clickedLink['tags'] = state.clickedLink['tags'].map( tag => tag.name);
     }
   }
 }

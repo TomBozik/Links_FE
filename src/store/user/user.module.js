@@ -67,6 +67,7 @@ export const user = {
     },
 
     REGISTER_SUCCESS(state) {
+      //TODO: ulozit do premennej, ze bol regnuty, premennu pouzit v Login page
       state.loggedIn = false;
     },
     REGISTER_FAILURE(state) {

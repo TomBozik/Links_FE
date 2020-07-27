@@ -3,8 +3,6 @@
 
 		<div class="self-center mx-auto"> 
 			<div v-if="user && !links && !loading && !loadingError" class="m-auto text-2xl font-bold tracking-wide">Welcome, {{user.name}}</div>
-			<div v-if="user && !links && loading" class="flex w-full">LOADING...</div>
-			<div v-if="user && !links && loadingError" class="flex w-full">ERROR</div>
 		</div>
 
 		<div v-if="links" class="flex w-full"><LinkList/></div>
@@ -45,6 +43,7 @@ export default {
 
 	mounted() {
 		this.$store.dispatch('category/getCategories');
+		this.$store.dispatch('link/getTags');
 		this.$store.dispatch('user/getUser');
 	}
 }

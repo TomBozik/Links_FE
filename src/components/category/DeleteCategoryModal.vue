@@ -7,14 +7,14 @@
         <div class="flex flex-col overflow-hidden bg-white border rounded shadow-lg">
 
           <div class="px-8 pt-4 pb-2 text-center">
-            <h3 class="text-xl font-semibold">Delete Category</h3>
+            <h3 class="text-xl font-semibold">Delete Category?</h3>
           </div>
 
           <div class="px-8 pt-4 pb-2 text-red-600" v-if="errors">{{errors}}</div>
 
           <div class="flex items-center justify-center p-2">
-            <button class="px-6 py-1 mb-1 mr-1 text-sm font-bold text-red-500 uppercase outline-none focus:outline-none" type="button" v-on:click="deleteCategory()">Delete</button>
-            <button class="px-6 py-1 mb-1 mr-1 text-sm font-bold text-green-500 uppercase outline-none focus:outline-none" type="button" v-on:click="toggleModal()">Close</button>
+            <button class="px-6 py-1 mb-1 mr-1 text-sm font-bold text-red-500 uppercase outline-none hover:text-red-700 focus:outline-none" type="button" v-on:click="deleteCategory()">Delete</button>
+            <button class="px-6 py-1 mb-1 mr-1 text-sm font-bold text-gray-700 uppercase outline-none hover:text-gray-900 focus:outline-none" type="button" v-on:click="toggleModal()">Close</button>
           </div>
 
         </div>

@@ -1,22 +1,22 @@
 <template>
-	<div :class="navbarIsOpen ? 'flex w-full sm:w-56' : 'hidden sm:flex sm:w-56'" class="flex-col justify-between overflow-y-auto bg-gray-100 border-r" >
+	<div :class="navbarIsOpen ? 'flex w-full sm:w-56' : 'hidden sm:flex sm:w-56'" class="flex-col justify-between overflow-y-auto bg-gray-100 border-l border-r" >
 		<div class="p-1 text-lg font-bold tracking-wide text-center uppercase shadow-md sm:p-4">Links</div>
 		<div class="flex flex-col flex-1 p-4 overflow-y-auto">
 			<div class="flex flex-col pb-4">
 				<div class="flex items-center">
-					<div class="w-1/6"><button class="self-start text-xl rounded-full appearance-none focus:outline-none" @click="newCategoryInput = !newCategoryInput"><i class="fas fa-plus"></i></button></div>
+					<div class="w-1/6"><button class="self-start text-xl text-gray-900 rounded-full appearance-none hover:text-custom-orange focus:outline-none" @click="newCategoryInput = !newCategoryInput"><i class="fas fa-plus"></i></button></div>
 					<input :class="{ hidden: !newCategoryInput }" v-model="newCategoryName" class="w-5/6 px-2 py-2 -my-2 font-semibold leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none" id="category" type="text" placeholder="New Category">
 				</div>
 				<div class="pt-1 text-red-600" v-if="error && newCategoryInput ">{{error}}</div>
-				<button :class="{ hidden: !newCategoryInput }"  class="self-end pt-2 pr-1 text-sm font-semibold uppercase focus:outline-none" @click="createCategory">Create</button>
+				<button :class="{ hidden: !newCategoryInput }"  class="self-end pt-2 pr-1 text-sm font-semibold text-gray-900 uppercase hover:text-custom-orange focus:outline-none" @click="createCategory">Create</button>
 			</div>
 			<CategoryList />
 		</div>
 
-		<button @click="exportLinks" class="flex pl-2 text-sm font-semibold text-gray-700 uppercase">Export</button>
+		<button @click="exportLinks" class="flex pl-2 text-sm font-semibold text-gray-900 uppercase appearance-none hover:text-custom-orange focus:outline-none">Export</button>
 		
 		<div class="px-4 py-2 text-center border-t">
-			<a href="#" @click.prevent="logout" v-if="loggedIn" class="font-bold uppercase">Logout <i class="fas fa-sign-out-alt"></i></a>
+			<a href="#" @click.prevent="logout" v-if="loggedIn" class="font-bold text-gray-900 uppercase hover:text-custom-orange">Logout <i class="fas fa-sign-out-alt"></i></a>
 		</div>
 
 	</div>
