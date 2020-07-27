@@ -30,7 +30,7 @@
 
             <div class="flex items-center justify-end p-2">
               <button class="px-2 py-1 mb-1 mr-1 text-sm font-bold text-gray-700 uppercase outline-none sm:px-8 hover:text-gray-900 focus:outline-none" type="button" v-on:click="toggleModal()">Close</button>
-              <button class="px-2 py-1 mb-1 mr-1 text-sm font-bold text-blue-500 uppercase outline-none sm:px-8 hover:text-blue-700 focus:outline-none" type="submit" v-on:click="updateLink()">Update</button>
+              <button class="px-2 py-1 mb-1 mr-1 text-sm font-bold text-blue-500 uppercase outline-none sm:px-8 hover:text-blue-700 focus:outline-none" type="submit">Update</button>
             </div>
           </form>
 

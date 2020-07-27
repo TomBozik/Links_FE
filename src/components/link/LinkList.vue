@@ -17,12 +17,12 @@
     <div v-for="link in links" :key="link.id">
       <div class="p-2 mb-4 bg-white rounded-md shadow-lg">
         <div class="flex justify-between">
-          <div>
+          <div class="w-5/6">
             <div class="text-xl font-bold"> {{ link.name }} </div>
-            <div class="font-semibold text-gray-700 text-md"> {{ link.description }} </div>
             <div class="text-sm truncate hover:text-custom-orange"> <a :href="link.url" target="_blank"> {{link.url}}</a></div>
+            <div class="font-semibold text-gray-700 text-md"> {{ link.description }} </div>
             <div class="flex pt-2">
-              <div v-for="tag in link.tags" :key="tag.name" class="px-1 text-xs font-semibold text-gray-700 uppercase cursor-pointer hover:text-custom-orange" @click="addTagToFilter(tag.name)">{{ tag.name }}</div>
+              <div v-for="tag in link.tags" :key="tag.name" class="pr-1 text-xs font-semibold text-gray-700 uppercase cursor-pointer hover:text-custom-orange" @click="addTagToFilter(tag.name)">{{ tag.name }}</div>
             </div>
           </div>
           <div class="flex flex-col items-end justify-between lg:flex-row">
