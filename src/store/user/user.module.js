@@ -3,8 +3,8 @@ import router from "@/router";
 
 const isLoggedIn = localStorage.getItem('token');
 const initialState = isLoggedIn
-  ? { loggedIn: true, user: null  }
-  : { loggedIn: false, user: null };
+  ? { loggedIn: true, user: null, accountCreated: false }
+  : { loggedIn: false, user: null, accountCreated: false };
 
 
 export const user = {
@@ -61,13 +61,14 @@ export const user = {
     LOGIN_SUCCESS(state, data) {
       localStorage.setItem('token', data.data);
       state.loggedIn = true;
+      state.accountCreated = false;
     },
     LOGIN_FAILURE(state) {
       state.loggedIn = false;
     },
 
     REGISTER_SUCCESS(state) {
-      //TODO: ulozit do premennej, ze bol regnuty, premennu pouzit v Login page
+      state.accountCreated = true;
       state.loggedIn = false;
     },
     REGISTER_FAILURE(state) {

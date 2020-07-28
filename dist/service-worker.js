@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.b52f2da8e781428017877700e30b6fae.js"
+  "/precache-manifest.aac959cea190840b1e6efe03808b3a5e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Links-TmBo"});
