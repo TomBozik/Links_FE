@@ -26,6 +26,14 @@ export default {
 
   export(){
     return Api().request('/export', {responseType: 'blob'});
-  }
+  },
+
+  import(payload){
+    return Api().post('/import', payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  },
 
 }

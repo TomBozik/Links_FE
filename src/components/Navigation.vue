@@ -13,8 +13,11 @@
 			<CategoryList />
 		</div>
 
-		<button @click="exportLinks" class="flex pl-2 text-sm font-semibold text-gray-900 uppercase appearance-none hover:text-custom-orange focus:outline-none">Export</button>
-		
+		<div class="flex justify-between">
+			<button @click="exportLinks" class="flex pl-2 text-sm font-semibold text-gray-900 uppercase appearance-none hover:text-custom-orange focus:outline-none">Export</button>
+			<label class="flex pr-2 text-sm font-semibold text-gray-900 uppercase appearance-none cursor-pointer hover:text-custom-orange focus:outline-none">Import<input v-on:change="importLinks()" id="file" ref="file" type="file" style="display: none;"/></label>
+		</div>
+
 		<div class="px-4 py-2 text-center border-t">
 			<a href="#" @click.prevent="logout" v-if="loggedIn" class="font-bold text-gray-900 uppercase hover:text-custom-orange">Logout <i class="fas fa-sign-out-alt"></i></a>
 		</div>
@@ -35,6 +38,7 @@ export default {
 	
   data() {
 		return {
+			file: '',
 			newCategoryInput: false,
 			newCategoryName: null,
 			error: null
@@ -52,6 +56,12 @@ export default {
         link.click();
         link.remove();
       });
+		},
+		importLinks(){
+			this.file = this.$refs.file.files[0];
+			let formData = new FormData();
+			formData.append('file', this.file);
+			LinkApi.import(formData);
 		},
 		logout(){
 			this.$store.dispatch('user/logout');
