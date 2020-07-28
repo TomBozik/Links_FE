@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+let url = 'https://links-api.tmbo.sk/api'
+if (process.env.NODE_ENV === 'development') {
+    url = 'http://localhost:8000/api'
+}
+
 let BaseApi = axios.create({
-    // baseURL: 'http://localhost:8000/api',
-    baseURL: 'https://links-api.tmbo.sk/api',
+    baseURL: url
 });
 
 let Api = function(){
