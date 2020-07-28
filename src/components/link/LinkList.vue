@@ -17,7 +17,7 @@
     <div v-for="link in links" :key="link.id">
       <div class="p-2 mb-4 bg-white rounded-md shadow-lg">
         <div class="flex justify-between">
-          <div class="w-5/6">
+          <div class="w-3/4">
             <div class="text-xl font-bold"> {{ link.name }} </div>
             <div class="text-sm truncate hover:text-custom-orange"> <a :href="link.url" target="_blank"> {{link.url}}</a></div>
             <div class="font-semibold text-gray-700 text-md"> {{ link.description }} </div>
