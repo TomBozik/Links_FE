@@ -13,6 +13,8 @@
 			<CategoryList />
 		</div>
 
+		<div v-if="importSuccess" class="text-sm font-semibold tracking-tighter text-center text-green-500 uppercase">Success</div>
+		<div v-if="importError" class="text-sm font-semibold tracking-tighter text-center text-red-500 uppercase">{{importError}}</div>
 		<div class="flex justify-between">
 			<button @click="exportLinks" class="flex pl-2 text-sm font-semibold text-gray-900 uppercase appearance-none hover:text-custom-orange focus:outline-none">Export</button>
 			<label class="flex pr-2 text-sm font-semibold text-gray-900 uppercase appearance-none cursor-pointer hover:text-custom-orange focus:outline-none">Import<input v-on:change="importLinks()" id="file" ref="file" type="file" style="display: none;"/></label>
@@ -41,12 +43,15 @@ export default {
 			file: '',
 			newCategoryInput: false,
 			newCategoryName: null,
-			error: null
+			error: null,
+			importSuccess: null,
+			importError: null,
 		}
 	},
 	
   methods: {
 		exportLinks(){
+			//TODO: move to Component
 			LinkApi.export().then(({ data }) => {
         const downloadUrl = window.URL.createObjectURL(new Blob([data]));
         const link = document.createElement('a');
@@ -58,10 +63,22 @@ export default {
       });
 		},
 		importLinks(){
+			//TODO: move to Component
 			this.file = this.$refs.file.files[0];
 			let formData = new FormData();
 			formData.append('file', this.file);
-			LinkApi.import(formData);
+			// LinkApi.import(formData);
+			LinkApi.import(formData).then(
+				() => {
+					this.importSuccess = true;
+					this.importError = false;
+					this.$store.dispatch("category/getCategories");
+				},
+        error => {
+					this.importError = error.response.data.error;
+					this.importSuccess = false;
+        }
+      );
 		},
 		logout(){
 			this.$store.dispatch('user/logout');
@@ -69,6 +86,7 @@ export default {
 		loadCategories(){
 			this.$store.dispatch("category/getCategories");
 		},
+		//TODO: move to Component
 		createCategory(){
 			this.$store.dispatch('category/createCategory', this.newCategoryName)
       .then(
