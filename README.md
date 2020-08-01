@@ -1,26 +1,13 @@
-# links-fe
+## Links
 
-BE: https://github.com/TomBozik/links-be
+Front End part of application. The application is used to store url pages. Urls are classified into categories, to each url it is possible to assign tags on the basis of which urls can be filtered. The application can be installed as PWA.
 
-## Project setup
-```
-npm install
-```
+Backend: https://github.com/TomBozik/links-be
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Live: https://links.tmbo.sk
 
-### Compiles and minifies for production
-```
-npm run build
-```
+![Project](/docs/gif.gif)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Stack
+* Tailwind
+* Vue

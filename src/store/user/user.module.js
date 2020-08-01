@@ -80,6 +80,7 @@ export const user = {
       state.user = null;
       localStorage.removeItem('token');
       router.push({name: 'Login'});
+      location.reload();
     },
 
     GET_USER_SUCCESS(state, data) {
